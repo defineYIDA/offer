@@ -113,4 +113,82 @@ public class FindDuplicate {
         return false;
     }
 
+    /**
+     * {2,3,4,5,6,4,3,7}找出任意重复数字，不能修改输入数组
+     * 思路：
+     * 二分查找，找到0到length的middle，计算0到middle在数组中count，if大于
+     * @param numbers
+     * @param length
+     * @return 0-非法输入；-1-没有重复数字；其他值为重复值
+     */
+    public static int getDuplication(int[] numbers,int length){
+        if(numbers==null||length<=0){
+            return 0;
+        }
+        int start=1;
+        int end=length-1;
+        while (end>=start){
+            int middle=(end-start)/2+start;
+            int count=countRange(numbers,length,start,middle);
+            if(end==start){
+                if(count>1){
+                    return start;
+                }else {
+                    break;
+                }
+            }
+            if(count>(middle-start+1)){
+                end=middle;
+            }else {
+                start=middle+1;
+            }
+        }
+        return -1;
+    }
+    private static int countRange(int[] n,int length,int start,int end){
+        if(null==n){
+            return 0;
+        }
+        int count=0;
+        for(int i=0;i<length;i++){
+            if(n[i]>=start&&n[i]<=end){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * 二维数组判断数字是否存在
+     * 思路二：把每一行当作一次二分查找
+     * @param target
+     * @param array
+     * @return
+     */
+    public boolean Find(int target, int [][] array) {
+        boolean found=false;
+        int rows=array.length;
+        int columns=array[0].length;
+        if(array!=null&&rows!=0&&columns!=0){
+            int row=0;
+            int column=columns-1;
+            while(row<rows&&column>=0){
+                if(array[row][column]==target){
+                    found=true;
+                    break;
+                }else if(array[row][column]>target){
+                    --column;
+                }else{
+                    ++row;
+                }
+            }
+        }
+        return found;
+    }
+    public static void main(String[] args){
+        int[] nums={1,4,4,5,6,3,2,7};
+        int result=getDuplication(nums,8);
+        int [][] array=new int[2][2];
+        System.out.println(result);
+    }
 }
