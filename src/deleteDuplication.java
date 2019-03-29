@@ -55,6 +55,8 @@ public class deleteDuplication {
         }
         return pHead;
     }
+
+
     public class Solution {
         public ListNode deleteDuplication(ListNode pHead) {
             if (pHead == null || pHead.next == null) { // 只有0个或1个结点，则返回
