@@ -9,6 +9,8 @@ public class DC {
        /* int[] arr={1,2,3,4,5,6,7,8,8,8,6};
         System.out.println(sum(arr));*/
         System.out.println(find(0,arr.length-1));
+        dfs(0,0);
+        System.out.println("total:"+total);
     }
     public static int sum(int[] arr){
         /*基线条件*/
@@ -58,4 +60,33 @@ public class DC {
             return find(middle,j);
         }
     }
+
+    public static int total=0;//分法
+    /**
+     * 分牌
+     * @param count 当前牌的数量
+     * @param index 分到第几张牌了
+     */
+    public static void dfs(int count ,int index){
+        /*基线条件*/
+        if(count>13){
+            return;
+        }
+        //index为13，代表刚好分完，牌分到了13
+        if(index>=13){
+            //代表手上刚好有13张牌
+            if(count==13){
+                total++;
+            }
+            return;
+        }
+        /*递归条件*/
+        for(int i=0;i<=4;i++){
+            /**
+             * 递归的参数不要使用--->单目运算符
+             */
+            dfs(count+i,index+1);
+        }
+    }
+
 }
