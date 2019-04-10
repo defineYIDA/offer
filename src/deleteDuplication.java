@@ -56,7 +56,9 @@ public class deleteDuplication {
         return pHead;
     }
 
-
+    /**
+     * 将重复结点全部删除
+     */
     public class Solution {
         public ListNode deleteDuplication(ListNode pHead) {
             if (pHead == null || pHead.next == null) { // 只有0个或1个结点，则返回
@@ -73,6 +75,28 @@ public class deleteDuplication {
                 pHead.next = deleteDuplication(pHead.next); // 保留当前结点，从下一个结点开始递归
                 return pHead;
             }
+        }
+    }
+
+    /**
+     * 重复结点保留一个
+     */
+    class Solution1 {
+        public ListNode deleteDuplicates(ListNode head) {
+            if(null==head||null==head.next){
+                return head;
+            }
+            if(head.val==head.next.val){
+                ListNode pNode=head.next;
+                while(pNode!=null&&pNode.next!=null&&head.val==pNode.next.val){
+                    pNode=pNode.next;
+                }
+                return deleteDuplicates(pNode);
+            }else{
+                head.next=deleteDuplicates(head.next);
+                return head;
+            }
+
         }
     }
 }

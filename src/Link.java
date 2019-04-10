@@ -41,13 +41,22 @@ public class Link {
      * 打印链表，递归版本
      */
     public class Solution1{
-        ArrayList<Integer> arrayList=new ArrayList<Integer>();
+        ArrayList<Integer> arrayList=new ArrayList<>();
         public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
             if(listNode!=null){
                 this.printListFromTailToHead(listNode.next);
                 arrayList.add(listNode.val);
             }
             return arrayList;
+        }
+        public ListNode deleteDuplication(ListNode pHead){
+            //基线条件
+            if(null==pHead||null==pHead.next){
+                return pHead;
+            }
+            pHead.next=deleteDuplication(pHead.next);
+            arrayList.add(pHead.val);
+            return pHead;
         }
     }
 
@@ -65,4 +74,24 @@ public class Link {
             return arr;
         }
     }
+    int count=1;
+    int del=8;
+    //遍历链表删除倒数第n=8个元素
+    public ListNode removeNode(ListNode head){
+        if(null==head||null==head.next){
+            return null;
+        }
+        removeNode(head.next);
+        //归途中进行计数，并且删除目标元素
+        count++;
+        if(del==count){
+            head.val=head.next.val;
+            head.next=head.next.next;
+        }else if(del==1&&count==2){//这里增加一次特殊处理
+            head.next=null;
+        }
+        return head;
+
+    }
+
 }
