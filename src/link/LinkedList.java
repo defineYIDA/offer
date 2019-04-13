@@ -1,5 +1,7 @@
 package link;
 
+import java.util.NoSuchElementException;
+
 /**
  * @Author: zl
  * @Date: 2019/4/13 17:10
@@ -61,6 +63,16 @@ public class LinkedList<T> {
             pred.next = newNode;
         size++;
     }
+    private void linkFirst(T t) {
+        final Node<T> f = first;
+        final Node<T> newNode = new Node<>(null, t, f);
+        first = newNode;
+        if (f == null)
+            last = newNode;
+        else
+            f.prev = newNode;
+        size++;
+    }
 
     public T get(int index) {
         if(!(index >= 0 && index < size)){
@@ -100,7 +112,12 @@ public class LinkedList<T> {
         }
         return unlink(node(index));
     }
-
+    public T removeFirst() {
+        final Node<T> f = first;
+        if (f == null)
+            throw new NoSuchElementException();
+        return unlinkFirst(f);
+    }
     T unlink(Node<T> x) {
         // assert x != null;
         final T element = x.item;
@@ -139,7 +156,33 @@ public class LinkedList<T> {
         return size;
     }
 
+    public void addFirst(T t) {
+        linkFirst(t);
+    }
 
+    public T getFirst() {
+        final Node<T> f = first;
+        if (f == null)
+            throw new NoSuchElementException();
+        return f.item;
+    }
+    private T unlinkFirst(Node<T> f) {
+        // assert f == first && f != null;
+        final T element = f.item;
+        final Node<T> next = f.next;
+        f.item = null;
+        f.next = null; // help GC
+        first = next;
+        if (next == null)
+            last = null;
+        else
+            next.prev = null;
+        size--;
+        return element;
+    }
+    public boolean isEmpty(){
+        return size==0;
+    }
     public static void main(String[] args) throws Exception {
         LinkedList list = new LinkedList();
         list.add("a" );
