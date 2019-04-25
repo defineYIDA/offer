@@ -20,7 +20,7 @@ public class Dijkstra {
     }
     public static void main(String var[]){
         //构建有向权重图
-        Map<String,List<node>>all=new HashMap<>();
+        Map<String, List<node>> all=new HashMap<>();
         List<node> start=new ArrayList<>();
         start.add(new node("A",6));
         start.add(new node("B",2));
@@ -60,7 +60,7 @@ public class Dijkstra {
         //获得当前权重最小的节点的name
         String node=findLowestCostNode();
         check.add(name);
-        while (node!=null){
+        while (node!=null) {
             float cost=costs.get(node);//获得对应的累计权重值
             List<node>nodes=all.get(node);//获得该节点的邻居节点
             for(node n : nodes){//遍历邻居节点
