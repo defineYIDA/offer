@@ -4,19 +4,29 @@
  */
 public class QuickSort {
     public static void main(String var[]){
-        int[] arr={2,1,4,3};
-        QSort(arr,0,3);
-        System.out.println(arrayToString(arr));
+        int[] arr={8,2,1,4,3,7,2,9,5};
+        QSort(arr,0,8);
 
+        System.out.println(arrayToString(arr));
+        int[]arr1={1,2};
+        swap(arr1,0,1);
+        int[]arr2={2,2};
+        swap(arr2,0,1);
+        int[]arr3={2};
+        swap(arr3,0,0);
+        System.out.println(arrayToString(arr1));
+        System.out.println(arrayToString(arr2));
+        System.out.println(arrayToString(arr3));
     }
 
     /**
      * 船新版本
+     * QSort[小于base] base QSort[大于base]
      * @param num
      * @param left 当前数组的头指针
      * @param right 尾指针
      */
-    public static void QSort(int[] num,int left,int right){
+    /*public static void QSort(int[] num,int left,int right){
         //如果left等于right，即数组只有一个元素，直接返回
         if(left>=right) {
             return;
@@ -50,7 +60,7 @@ public class QuickSort {
         QSort(num,left,i-1);
         //右边递归
         QSort(num,i+1,right);
-    }
+    }*/
 
     /**
      * 将一个int类型数组转化为字符串
@@ -64,7 +74,46 @@ public class QuickSort {
         }
         return str;
     }
+    //快排
+    public static void QSort(int[] a,int left,int right) {
+        //当只有一个元素直接返回
+        if(left>=right) {
+            return;
+        }
+        //选择最左边元素为基线值
+        int base =a[left];
+        int i=left;
+        int j=right;
+        //移动元素使得基线值
+        while(i<j) {
+            //左移放前面，不然会导致需要和base的替换的i值改变
+            while(i<j&&base<=a[j]) {
+                j--;
+            }
+            //右移
+            while(i<j&&base>=a[i]) {
+                i++;
+            }
 
+            if(i<j) {
+                swap(a,i,j);
+            }
+        }
+        //交换base和比base小的最后一个元素的值
+        swap(a,left,i);
+
+        QSort(a,left,i-1);//左边递归
+        QSort(a,i+1,right);
+    }
+
+    private static void swap(int[] a,int i,int j) {
+        /*a[i]=a[tar]^a[i];
+        a[tar]=a[i]^a[tar];
+        a[i]=a[i]^a[tar];*/
+        int temp=a[i];
+        a[i]=a[j];
+        a[j]=temp;
+    }
 
 
 
