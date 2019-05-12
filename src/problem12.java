@@ -33,6 +33,8 @@ public class problem12 {
             return true;
         }
         boolean hasPath = false;
+        //注意用一维数组替代二维数组，将二维索引转化为一维索引的换算法：
+        //row * cols + col == 总列数 X 当前行 + 当前列
         int now = row * cols + col;//当前判断的点
         //1）判断当前位置是否满足字符路径
         //2）将对索引越界的判断放在这里，可以使代码逻辑更加清晰
@@ -57,5 +59,60 @@ public class problem12 {
             }
         }
         return hasPath;
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------------
+
+    public int movingCount(int threshold, int rows, int cols)
+    {
+        //参数校验
+        if (threshold < 0 || rows < 1 || cols < 1) {
+            return 0;
+        }
+        //要记录走过的位置，要初始化visited变量
+        boolean[] visited = new boolean[rows * cols];
+        for (int i = 0; i < visited.length; i++) {
+            visited[i] = false;
+        }
+        return movingCountCore(threshold, rows, cols, 0, 0, visited);
+    }
+
+    public int movingCountCore(int threshold, int rows, int cols, int row, int col, boolean[] visited) {
+        int count = 0;
+        int now = row * cols + col;
+        if (checkCount(threshold, rows, cols, row, col, visited)) {
+            visited[now] = true;
+            count = 1 +
+                    movingCountCore(threshold, rows, cols, row + 1, col, visited) +
+                    movingCountCore(threshold, rows, cols, row, col + 1, visited) +
+                    movingCountCore(threshold, rows, cols, row - 1, col, visited) +
+                    movingCountCore(threshold, rows, cols, row, col - 1, visited);
+        }
+        return count;
+    }
+    //1）索引越界
+    //2）未访问
+    //3）满足小于等于threshold
+    public boolean checkCount(int threshold, int rows, int cols, int row, int col, boolean[] visited) {
+        int now = row * cols + col;
+        //注意判断索引时row >= 0
+        if (row >= 0 && row < rows && col >= 0 && col < cols
+                && checkThreshold(threshold, row, col) && !visited[now]){
+            return true;
+        }
+        return false;
+    }
+    //
+    public boolean checkThreshold(int threshold, int row, int col) {
+        return threshold >= (getCount(row) + getCount(col));
+    }
+    //
+    public int getCount(int num) {
+        int result = 0;
+        while (num > 0) {
+            result += num % 10;
+            num /= 10;
+        }
+        return result;
     }
 }
