@@ -1,8 +1,10 @@
+package subject;
+
 /**
  * @Author: zl
  * @Date: 2019/5/12 23:59
  */
-public class problem12 {
+public class Pro12 {
     public boolean hasPath(char[] matrix, int rows, int cols, char[] str)
     {
         //参数校验
