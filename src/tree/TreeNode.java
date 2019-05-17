@@ -17,7 +17,7 @@ import java.util.Queue;
  * 递归实现和非递归实现方式
  */
 public class TreeNode {
-    int val;
+    public int val;
     public TreeNode left;
     public TreeNode right;
     public TreeNode(int x){
@@ -171,5 +171,8 @@ public class TreeNode {
 
 
 //-----------------------------------------------------------LRD_END
+
+
+
 
 }
