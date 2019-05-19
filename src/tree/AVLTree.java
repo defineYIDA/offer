@@ -18,7 +18,7 @@ public class AVLTree <T extends Comparable<? super T>> {
             this(element, null, null);
         }
 
-        AVLNode(T element, AVLNode left, AVLNode right) {
+        AVLNode(T element, AVLNode<T> left, AVLNode<T> right) {
             this.element = element;
             this.left = left;
             this.right = right;
