@@ -34,6 +34,94 @@ public class AVLTree <T extends Comparable<? super T>> {
     private int height(AVLNode<T> node) {
         return node == null ? -1 : node.height;
     }
+
+    /**
+     * insert
+     * @param element 插入节点的元素值
+     * @param root 树的根节点
+     * @return
+     */
+    private AVLNode<T> insert(T element, AVLNode<T> root) {
+        if (root == null) {
+            return new AVLNode<>(element);
+        }
+
+        int compare = element.compareTo(root.element);
+
+        if (compare < 0) {
+            root.left = insert(element, root.left);
+        } else if (compare > 0) {
+            root.right = insert(element, root.right);
+        } else {
+            root.element = element;
+        }
+        return balance(root);
+    }
+
+    private static final int ALLOWED_IMBALANCE = 1;
+
+    /**
+     * 平衡树
+     * @param t
+     * @return
+     */
+    private AVLNode<T> balance(AVLNode<T> t) {
+        if (t == null) {
+            return t;
+        }
+        if (height(t.left) - height(t.right) > ALLOWED_IMBALANCE) {
+            if (height(t.left.left) >= height(t.left.right)) {
+                t = rotateWithLeftChild(t);
+            } else {
+                t = doubleWithLeftChild(t);
+            }
+        } else {
+            if (height(t.right) - height(t.left) > ALLOWED_IMBALANCE) {
+                if (height(t.right.right) >= height(t.right.left)) {
+                    t = rotateWithRightChild(t);
+                } else {
+                    t = doubleWithRightChild(t);
+                }
+            }
+        }
+        t.height = Math.max(height(t.left),height(t.right));
+        return t;
+    }
+
+    /**
+     *
+     * @param element
+     * @param t
+     * @return
+     */
+    private AVLNode<T> remove(T element, AVLNode<T> t) {
+        if (t == null) {
+            return t;
+        }
+        int compare = element.compareTo(t.element);
+
+        if (compare < 0) {
+            t.left = remove(element, t.left);
+        } else if (compare > 0) {
+            t.right = remove(element, t.right);
+        } else if (t.left != null && t.right != null) { //two chidren
+            //删除的节点存在左右节点，则实现一个右子树的最小节点的惰性删除
+            t.element = findMin(t.right).element;
+            //删除右子树最小节点
+            t.right = remove(t.element, t.right);
+        } else {
+            t = (t.left != null) ? t.left : t.right;
+        }
+        return balance(t);
+    }
+    private AVLNode<T> findMin(AVLNode<T> t) {
+        if (t == null) {
+            return null;
+        } else if (t.left == null) {
+            return t;
+        }
+        return findMin(t.left);
+    }
     //--------------------------------------------------------------------------------------------rotate_start
     /**
      * 不平衡的节点为k2，其左节点为k1
@@ -99,7 +187,6 @@ public class AVLTree <T extends Comparable<? super T>> {
         return rotateWithRightChild(k1);
     }
     //-----------------------------------------------------------------------------------------------rotate_end
-
 
 
 }
