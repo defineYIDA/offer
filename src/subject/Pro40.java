@@ -23,6 +23,7 @@ public class Pro40 {
         if(k > length || k == 0){
             return result;
         }
+
         //使用堆的目的，O(1)找到堆中最大的数
         //可以处理海量数据，就是数据一次性不能全部加入硬盘
         PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(k, new Comparator<Integer>() {
