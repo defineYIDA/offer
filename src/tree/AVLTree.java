@@ -109,7 +109,7 @@ public class AVLTree <T extends Comparable<? super T>> {
             t.element = findMin(t.right).element;
             //删除右子树最小节点
             t.right = remove(t.element, t.right);
-        } else {
+        } else { //只有一个子树
             t = (t.left != null) ? t.left : t.right;
         }
         return balance(t);
