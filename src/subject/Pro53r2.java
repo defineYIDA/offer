@@ -4,7 +4,7 @@ package subject;
  * @Author: zl
  * @Date: 2019/5/28 11:04
  */
-public class Pro532 {
+public class Pro53r2 {
     public static void main(String[]  v) {
         int[] array = {3,3,3,3,4,5};
         System.out.println(getSameValAndIndex());
