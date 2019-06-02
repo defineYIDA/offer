@@ -1,5 +1,6 @@
 package subject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -39,6 +40,7 @@ public class Pro61 {
             small = big;
             big++;
         }
+        ArrayList<Integer> list = new ArrayList<>();
         return miss <= zero;
     }
 }
