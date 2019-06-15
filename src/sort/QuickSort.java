@@ -149,7 +149,7 @@ public class QuickSort {
             if(arr[0]>=arr[i]){
                 tmp1[x]=arr[i];
                 x=x+1;
-            }else {
+            } else {
                 tmp2[y]=arr[i];
                 y=y+1;
             }

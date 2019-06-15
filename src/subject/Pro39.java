@@ -21,6 +21,7 @@ public class Pro39 {
                 times--;
             }
         }
+        //不会影响时间复杂度，只要是固定次数的遍历
         if (!moreThanHalf(array, result)) {
             result = 0;
         }

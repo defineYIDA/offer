@@ -68,7 +68,7 @@ public class Pro45 {
         numbers[start] = numbers[left];
         numbers[left] = base;
         quickSort(numbers, start, left - 1, com);
-        quickSort(numbers, start + 1, right, com);
+        quickSort(numbers, left + 1, end, com);
     }
     private static class MComparator implements Comparator<Integer> {
         @Override
