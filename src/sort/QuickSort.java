@@ -6,8 +6,9 @@ package sort;
  */
 public class QuickSort {
     public static void main(String var[]){
-        int[] arr={8,2,1,4,3,7,2,9,5};
-        QSort(arr,0,8);
+        //int[] arr={8,2,1,4,3,7,2,9,5};
+        int[] arr = {1, 3, 1};
+        QSort(arr,0,2);
 
         System.out.println(arrayToString(arr));
         int[]arr1={1,2};
@@ -69,7 +70,7 @@ public class QuickSort {
      * @param arr
      * @return
      */
-    private static String arrayToString(int[] arr) {
+    public static String arrayToString(int[] arr) {
         String str = "";
         for (int a : arr) {
             str += a + "\t";

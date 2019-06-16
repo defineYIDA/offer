@@ -57,9 +57,10 @@ public class Dijkstra {
         initCosts(name,all);
         //初始parents
         initParents(name,all);
+        //起点作为已经处理加入集合
+        check.add(name);
         //获得当前权重最小的节点的name
         String node=findLowestCostNode();
-        check.add(name);
         while (node!=null) {
             float cost=costs.get(node);//获得对应的累计权重值
             List<node>nodes=all.get(node);//获得该节点的邻居节点
@@ -99,11 +100,13 @@ public class Dijkstra {
         return node_name;
     }
     //注意costs，只是针对start的最小累计权重
+    //寻找起点的所有临近节点，初始化
     public static void initCosts(String start,Map<String,List<node>>all){
         List<node>nodes=all.get(start);
         for (node node :nodes){
             costs.put(node.name,node.weight);
         }
+        //对于不相邻的节点初始化为不可达
         for (String name:all.keySet()){
             if(name.equals(start)){
                 continue;//忽略掉起点，防止后续判断出错

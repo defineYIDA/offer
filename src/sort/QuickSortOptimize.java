@@ -5,6 +5,19 @@ package sort;
  * @Date: 2019/6/15 23:13
  */
 public class QuickSortOptimize {
+    public static void main(String var[]) {
+        QuickSortOptimize optimize = new QuickSortOptimize();
+        //int[] arr={8,2,1,4,3,7,2,9,5};
+        int[] arr = {1, 2, 1, 2, 1};
+        optimize.QSort(arr, 0, arr.length - 1);
+        System.out.println(QuickSort.arrayToString(arr));
+    }
+    /**
+     *
+     * @param a
+     * @param left
+     * @param right
+     */
     public void QSort(int[] a,int left,int right) {
         //当只有一个元素直接返回
         if(left>=right) {
@@ -17,11 +30,11 @@ public class QuickSortOptimize {
         //移动元素使得基线值
         while(i<j) {
             //先右移
-            while(i<j&&base>=a[i]) {
-                i++;
+            while(i<j&&base>a[++i]) {
+                //i++;
             }
-            while(i<j&&base<=a[j]) {
-                j--;
+            while(i<j&&base<a[--j]) {
+                //j--;
             }
             if(i<j) {
                 swap(a,i,j);

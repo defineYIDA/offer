@@ -50,7 +50,7 @@ public class Pro713 {
         int[] a = {10, 5, 2, 6};
         p.numSubarrayProductLessThanK(a, 100);
     }
-    
+
     public int numSubarrayProductLessThanK1(int[] nums, int k) {
         int n=nums.length;
         int l=0,r=0;
