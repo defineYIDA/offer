@@ -16,11 +16,10 @@ public class Pro36 {
         return pHeadNodeInLink;
     }
     //先序遍历构建链表
-    private TreeNode convertNode(TreeNode pRootOfTree, TreeNode pLastNodeInLink) {
-        if (pRootOfTree == null) {
+    private TreeNode convertNode(TreeNode pCurrent, TreeNode pLastNodeInLink) {
+        if (pCurrent == null) {
             return null;
         }
-        TreeNode pCurrent = pRootOfTree;
         if (pCurrent.left != null) {
             //传递最后一个处理的指针
             pLastNodeInLink = convertNode(pCurrent.left, pLastNodeInLink);

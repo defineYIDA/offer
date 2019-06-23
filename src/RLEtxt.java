@@ -12,8 +12,10 @@ public class RLEtxt {
         String txtPath = "F:\\ASCII.txt";
         String enOutPath = "F:\\EncodeASCII.txt";
         String deOutPath = "F:\\DecodeASCII.txt";
+        //编码
         rle.RLEEncode(txtPath, enOutPath);
         System.out.println("RLE Encode success !，Path:" + enOutPath);
+        //解码
         rle.RLEDecode(enOutPath, deOutPath);
         System.out.println("RLE Decode success !，Path:" + deOutPath);
     }
@@ -58,15 +60,19 @@ public class RLEtxt {
             while ((line = reader.readLine()) != null) {
                 //转化为数组处理
                 String[] strings = line.split(" ");
+                //对每一行数据进行rle编码
                 List<String> resultLine = encodeCore(strings);
+                //编码结果写入输出缓存区
                 writeFile(resultLine, out);
             }
+            //刷新，输出
             out.flush();
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
+                //关闭输入流
                 reader.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -104,6 +110,7 @@ public class RLEtxt {
                     if (count == 1) {
                         resultStr.add(nowStr);
                     } else {
+                        //对行程长度(count)和值(nowStr)之间添加分割flag
                         resultStr.add(count + FLAG +nowStr);
                     }
                     resultStr.add(" ");
@@ -120,6 +127,7 @@ public class RLEtxt {
         }
         resultStr.add(end);
         resultStr.add(" ");
+        //处理完一行后添加换行，确保解码的准确
         resultStr.add("\r\n");
         return resultStr;
     }
@@ -138,9 +146,12 @@ public class RLEtxt {
             while ((line = reader.readLine()) != null) {
                 //转化为数组处理
                 String[] strings = line.split(" ");
+                //进行rle解码
                 List<String> resultLine = decodeCore(strings);
+                //写入输出流
                 writeFile(resultLine, out);
             }
+            //刷新，输出
             out.flush();
             out.close();
         } catch (IOException e) {
@@ -169,7 +180,7 @@ public class RLEtxt {
                 String[] s = strings[i].split(FLAG);
                 int count = Integer.valueOf(s[0]);
                 while (count > 0) {
-                    //""的特殊情况
+                    //""的特殊情况，处理头信息（header）中连续空格的情况
                     if (s.length == 1) {
                         resultStr.add(" ");
                     } else {
@@ -183,6 +194,7 @@ public class RLEtxt {
                 resultStr.add(" ");
             }
         }
+        //换行
         resultStr.add("\r\n");
         return resultStr;
     }
