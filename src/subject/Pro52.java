@@ -11,42 +11,40 @@ public class Pro52 {
      *    思路：遍历得到元素的长度，长链表-短链表 = 长链表先走的步数
      *
      */
+    //遍历链表得到长度，较长链表减去短链表是先走的步数
     public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) {
         if (pHead1 == null || pHead2 == null) {
             return null;
         }
-        int length1 = 0;
-        int length2 = 0;
-        ListNode pNode1 = pHead1;
-        ListNode pNode2 = pHead2;
-        while (pNode1 != null) {
-            length1++;
-            pNode1 = pNode1.next;
-        }
-        while (pNode2 != null) {
-            length2++;
-            pNode2 = pNode2.next;
-        }
+        int length1 = getLength(pHead1);
+        int length2 = getLength(pHead2);
+        ListNode node1 = pHead1;//s
+        ListNode node2 = pHead2;//l
+        int diff = length2 - length1;
         if (length1 > length2) {
-            int i = length1 - length2;
-            while (i > 0) {
-                pHead1 = pHead1.next;
-                i--;
-            }
-        } else {
-            int i = length2 - length1;
-            while (i > 0) {
-                pHead2 = pHead2.next;
-                i--;
-            }
+            diff = length1 - length2;
+            node1 = pHead2;
+            node2 = pHead1;
         }
-        while (pHead1 != null && pHead2 != null) {
-            if (pHead1 == pHead2) {
-                return pHead1;
+        while (diff > 0) {
+            node2 = node2.next;
+            diff--;
+        }
+        while (node1 != null && node2 != null) {
+            if (node1 == node2) {
+                return node1;
             }
-            pHead1 = pHead1.next;
-            pHead2 = pHead2.next;
+            node1 = node1.next;
+            node2 = node2.next;
         }
         return null;
+    }
+    private int getLength(ListNode node) {
+        int length = 0;
+        while (node != null) {
+            length++;
+            node = node.next;
+        }
+        return length;
     }
 }
