@@ -30,6 +30,7 @@ public class Pro777 {
             }
             //step 3 检查start的'L'左边'X'的个数是否不少于end中对应位置的'L'左边的'X'个数
             //step 4 检查start的'R'左边'X'的个数是否不多于end中对应位置的'R'左边的'X'个数
+            //比较X数，如果start的'L'左边的X数大于end'L'左边的'X'个数，就代表该L在end对应位置的右边，而L只能右移，所以不可能再通过移动相等
             if ((startArr[i] == 'L' && i < j) || (endArr[j] == 'R' && i > j)) {
                 return false;
             }
