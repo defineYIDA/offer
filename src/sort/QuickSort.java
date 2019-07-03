@@ -78,35 +78,35 @@ public class QuickSort {
         return str;
     }
     //快排
-    public static void QSort(int[] a,int left,int right) {
+    public static void QSort(int[] a, int left, int right) {
         //当只有一个元素直接返回
-        if(left>=right) {
+        if(left >= right) {
             return;
         }
         //选择最左边元素为基线值
-        int base =a[left];
-        int i=left;
-        int j=right;
+        int base = a[left];
+        int i = left;
+        int j = right;
         //移动元素使得基线值
-        while(i<j) {
+        while(i < j) {
             //左移放前面，不然会导致需要和base的替换的i值改变
-            while(i<j&&base<=a[j]) {
+            while(i < j && base <= a[j]) {
                 j--;
             }
             //右移
-            while(i<j&&base>=a[i]) {
+            while(i < j && base >= a[i]) {
                 i++;
             }
 
-            if(i<j) {
-                swap(a,i,j);
+            if(i < j) {
+                swap(a, i, j);
             }
         }
         //交换base和比base小的最后一个元素的值
-        swap(a,left,i);
+        swap(a, left, i);
 
-        QSort(a,left,i-1);//左边递归
-        QSort(a,i+1,right);
+        QSort(a, left, i-1);//左边递归
+        QSort(a, i+1, right);
     }
 
     private static void swap(int[] a,int i,int j) {
