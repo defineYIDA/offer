@@ -8,6 +8,10 @@ import tree.TreeNode;
  */
 public class Pro26 {
 
+    /**
+     * 非递归
+     *<href> leetcode.Pro572</>
+     */
     public boolean HasSubtree(TreeNode s, TreeNode t) {
         if (s == null || t == null)
             return false;
