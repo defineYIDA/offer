@@ -1,8 +1,10 @@
 package subject;
 
+import stack.Stack;
 import tree.TreeNode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author: zl
@@ -28,4 +30,38 @@ public class Pro34 {
         list.remove(list.size()-1);//到这里移除，回退效果
         return listAll;
     }
+
+    
+    public List<List<Integer>> pathSum1(TreeNode root, int sum) {
+        List<List<Integer>> list = new ArrayList<>();
+        if (root == null) {
+            return list;
+        }
+        List<Integer> subList = new ArrayList<>();//path
+
+        Stack<TreeNode> stack = new Stack<>();
+        Stack<Integer> numStack = new Stack<>();
+        Stack<List<Integer>> pathStack = new Stack<>();
+
+        int total = 0;
+        while (root != null || !stack.isEmpty()) {
+            if (root != null) {
+                total += root.val;
+                subList.add(root.val);//记录路径
+                if (total == sum && root.left == null && root.right == null) {
+                    list.add(new ArrayList<>(subList));
+                }
+                numStack.push(total);
+                stack.push(root.right);
+                pathStack.push(new ArrayList<>(subList));
+                root = root.left;
+            } else {
+                root = stack.pop();
+                total = numStack.pop();
+                subList = pathStack.pop();
+            }
+        }
+        return list;
+    }
+
 }
