@@ -14,6 +14,7 @@ public class pro449 {
         if (root == null) {
             return "";
         }
+        //记得用StringBuffer
         String enStr = "";
         Stack<TreeNode> stack = new Stack<>();
         while (root != null || !stack.isEmpty()) {
