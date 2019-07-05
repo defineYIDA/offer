@@ -31,7 +31,7 @@ public class Pro34 {
         return listAll;
     }
 
-    
+
     public List<List<Integer>> pathSum1(TreeNode root, int sum) {
         List<List<Integer>> list = new ArrayList<>();
         if (root == null) {

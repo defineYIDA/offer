@@ -18,35 +18,35 @@ public class QuickSortOptimize {
      * @param left
      * @param right
      */
-    public void QSort(int[] a,int left,int right) {
+    public void QSort(int[] a, int left, int right) {
         //当只有一个元素直接返回
-        if(left>=right) {
+        if(left >= right) {
             return;
         }
         //选择最左边元素为基线值
         int base = median3(a, left, right);
-        int i=left;
-        int j=right - 1;
+        int i = left;
+        int j = right - 1;
         //移动元素使得基线值
-        while(i<j) {
+        while(i < j) {
             //先右移
-            while(i<j&&base>a[++i]) {
+            while(i < j && base > a[++i]) {
                 //i++;
             }
-            while(i<j&&base<a[--j]) {
+            while(i < j && base < a[--j]) {
                 //j--;
             }
-            if(i<j) {
-                swap(a,i,j);
+            if(i < j) {
+                swap(a, i, j);
             }
         }
         //交换base和比base小的最后一个元素的值
-        swap(a,i ,right - 1);
+        swap(a, i ,right - 1);
 
-        QSort(a,left,i-1);//左边递归
-        QSort(a,i+1,right);
+        QSort(a, left, i - 1);//左边递归
+        QSort(a, i + 1, right);
     }
-    private void swap(int[] a,int i,int j) {
+    final private void swap(int[] a,int i,int j) {
         int temp=a[i];
         a[i]=a[j];
         a[j]=temp;
