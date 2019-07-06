@@ -1,5 +1,7 @@
 package subject;
 
+import stack.Stack;
+
 /**
  * @Author: zl
  * @Date: 2019/5/28 16:16
@@ -41,5 +43,24 @@ public class Pro54 {
             target = KthNodeCore(pRoot.right, k);
         }
         return target;
+    }
+    public int kthSmallest(TreeNode root, int k) {
+        if (root == null) {
+            return -1;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        while (root != null || !stack.isEmpty()) {
+            if (root != null) {
+                stack.push(root);
+                root = root.left;
+            } else {
+                root = stack.pop();
+                if (--k == 0) {
+                    return root.val;
+                }
+                root = root.right;
+            }
+        }
+        return -1;
     }
 }
