@@ -36,7 +36,7 @@ public class Pro16 {
         double result = powerWithPower(base, exponent >> 1);
         result *= result;
         //奇数的末字节为1
-        if ((exponent & 0x1) == 1) {
+        if ((exponent & 1) == 1) {
             result *= base;
         }
         return result;
