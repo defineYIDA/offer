@@ -6,14 +6,14 @@ package subject;
  */
 public class Pro17 {
     public static void main(String[] var) {
-        print1ToNthDigits(3);
+        print1ToNthDigits1(3);
     }
     /**
      * 思路分析：
      * 使用数组或者字符串来模拟数字的加法
      *空间复杂度n
      */
-    public static void print1ToNthDigits(int n) {
+    public static void print1ToNthDigits1(int n) {
         if (n <= 0) {
             return;
         }
@@ -32,19 +32,20 @@ public class Pro17 {
             }
         }
     }
+
     /**
      * 输入数字n，按顺序打印出从1最大的n位十进制数。比如输入3，则打印出1、2、3 一直到最大的3位数即999。
      *
      * @param n 数字的最大位数
      */
-    public static void printOneToNthDigits(int n) {
+    public static void printOneToNthDigits2(int n) {
         // 输入的数字不能为小于1
         if (n < 1) {
             throw new RuntimeException("The input number must larger than 0");
         }
         // 创建一个数组用于打存放值
         int[] arr = new int[n];
-        printOneToNthDigits(0, arr);
+        printOneToNthDigits2(0, arr);
     }
     /**
      * 输入数字n，按顺序打印出从1最大的n位十进制数。
@@ -52,7 +53,7 @@ public class Pro17 {
      * @param n   当前处理的是第个元素，从0开始计数
      * @param arr 存放结果的数组
      */
-    public static void printOneToNthDigits(int n, int[] arr) {
+    public static void printOneToNthDigits2(int n, int[] arr) {
         // 说明数组已经装满元素
         if (n >= arr.length) {
             // 可以输出数组的值
@@ -60,7 +61,7 @@ public class Pro17 {
         } else {
             for (int i = 0; i <= 9; i++) {
                 arr[n] = i;
-                printOneToNthDigits(n + 1, arr);
+                printOneToNthDigits2(n + 1, arr);
             }
         }
     }
@@ -90,7 +91,7 @@ public class Pro17 {
      *
      * @param n 数字的最大位数
      */
-    public static void printOneToNthDigits2(int n) {
+    public static void printOneToNthDigits3(int n) {
         // 输入值必须大于0
         if (n < 1) {
             throw new RuntimeException("The input number must larger than 0");
@@ -134,4 +135,5 @@ public class Pro17 {
         // 无进位返回0
         return 0;
     }
+
 }

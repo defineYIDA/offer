@@ -31,6 +31,7 @@ public class Pro19 {
                         matchCore(str, i + 1, pattern, j) ||
                         matchCore(str, i, pattern, j +2);
             } else {
+                //s到达末尾或者不相等都匹配0个
                 return matchCore(str, i, pattern, j +2);
             }
         } else {
