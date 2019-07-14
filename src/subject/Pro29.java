@@ -73,4 +73,47 @@ public class Pro29 {
         }
         return list;
     }
+    //-----------------------------------------------------------------------------------------------
+
+    /**
+     * 2019年7月14日10点13分
+     * @param matrix
+     * @return
+     */
+    public List<Integer> spiralOrder1(int[][] matrix) {
+        List<Integer> list = new ArrayList<>();
+        if (matrix == null) {
+            return list;
+        }
+        int rows = matrix.length;
+        if (rows == 0) {
+            return list;
+        }
+        int cols = matrix[0].length;
+        //每一次打印一圈
+        spiralOrderCore(matrix, 0, rows - 1, 0, cols - 1, list);
+        return list;
+    }
+    private void spiralOrderCore(int[][] matrix, int sRow, int eRow, int sCol, int eCol, List<Integer> list) {
+        if (sRow > eRow || sCol > eCol) {
+            return;
+        }
+        //左-->右
+        for (int i = sCol; i <= eCol; i++) {
+            list.add(matrix[sRow][i]);
+        }
+        //上-->下
+        for (int i = sRow + 1; i <= eRow; i++) {
+            list.add(matrix[i][eCol]);
+        }
+        //右-->左
+        for (int i = eCol - 1; i >= sCol && sRow != eRow; i--) {
+            list.add(matrix[eRow][i]);
+        }
+        //下-->上
+        for (int i = eRow - 1; i >= sRow + 1 && sCol != eCol; i--) {
+            list.add(matrix[i][sCol]);
+        }
+        spiralOrderCore(matrix, sRow + 1, eRow - 1, sCol + 1, eCol - 1, list);
+    }
 }
