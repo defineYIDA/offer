@@ -62,7 +62,7 @@ public class Pro49 {
         while (num % 5 == 0) {
             num /= 5;
         }
-        return (num == 1) ? true : false;
+        return num == 1;
     }
 
 }

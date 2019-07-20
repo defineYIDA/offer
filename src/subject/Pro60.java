@@ -34,6 +34,8 @@ public class Pro60 {
                 probabilities[1 - flag][i] = 0;
             }
 
+            //probabilities-n[n] = probabilities-n-1[n-1] + .....+probabilities-n-1[n-6]
+
             //抛出k个骰子，所有和的可能
             for (int i = k; i < length; i++) {
                 probabilities[1 - flag][i] = 0;
