@@ -49,4 +49,18 @@ public class Pro10 {
         }
         return second;
     }
+    public int JumpFloorII(int target) {
+        int second = 2;
+        if (target <= 2) {
+            return target == 1 ? 1 : 2;
+        }
+        //思路：这里是可以跳任意阶：
+        //Fn  = Fn-1+Fn-2+...+F1
+        //Fn-1=      Fn-2+...+F1
+        //Fn  = 2 * Fn-1
+        for (int i = 3; i <= target; i++) {
+            second = second * 2;
+        }
+        return second;
+    }
 }

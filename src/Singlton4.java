@@ -5,7 +5,7 @@
  * 当前解法，考虑了多线程加同步锁，
  */
 public class Singlton4 {
-    private static Singlton4 Singlton4;
+    private volatile static Singlton4 Singlton4;
 
     private Singlton4() {}
 
