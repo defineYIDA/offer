@@ -1,4 +1,4 @@
-package thread.productAndConsumerOneToOne;
+package thread.productAndConsumer;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,10 @@ import java.util.ArrayList;
  * @Date: 2019/8/2 20:33
  */
 public class Main {
+    /**
+     * 使用Synchronsize 的 wait/notify 实现多线程间生产者消费者模式
+     * @param args
+     */
     public static void main(String[] args) {
         ArrayList<String> goods = new ArrayList<>();//goods
         String lock = "lock";

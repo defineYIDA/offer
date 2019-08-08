@@ -1,4 +1,4 @@
-package thread.productAndConsumerOneToOne;
+package thread.productAndConsumer;
 
 import java.util.ArrayList;
 
