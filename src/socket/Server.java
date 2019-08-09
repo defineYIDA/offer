@@ -25,7 +25,6 @@ public class Server {
             while (in.read(buf) != -1) {
                 msg = new String(buf);
                 System.out.println(msg);
-
             }
             socket.close();
             in.close();

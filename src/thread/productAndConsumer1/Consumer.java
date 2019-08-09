@@ -23,7 +23,7 @@ public class Consumer implements Runnable {
         while (true) {
             try {
                 String s = blockingQueue.take();
-                Thread.sleep(11111);
+                Thread.sleep(1111);
                 System.out.println(Thread.currentThread().getName() + "消费了商品：--" + s);
             } catch (InterruptedException e) {
                 e.printStackTrace();

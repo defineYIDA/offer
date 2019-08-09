@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class Client {
     public static void main(String[] args) {
-        Socket cilent  = null;
+        Socket cilent;
         cilent = new Socket();
         /*try {
             cilent = new Socket("localhost", 8080);

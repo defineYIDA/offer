@@ -18,15 +18,18 @@ public class Main {
      */
     public static void main(String[] args) {
         ArrayList<String> goods = new ArrayList<>();//goods
-        BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(1);
+        BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(3);
+
+        //自定义队列
+        blockQueue.BlockingQueue<String> queue = new blockQueue.BlockingQueue<>(10);
 
         //BlockingQueue<String> blockingQueue = new SynchronousQueue<>();
 
         new Thread(new Product(blockingQueue, goods), "Product-1").start();//Product
-        new Thread(new Product(blockingQueue, goods), "Product-2").start();
-        new Thread(new Product(blockingQueue, goods), "Product-3").start();
+        /*new Thread(new Product(blockingQueue, goods), "Product-2").start();
+        new Thread(new Product(blockingQueue, goods), "Product-3").start();*/
         new Thread(new Consumer(blockingQueue, goods), "Consumer-1").start();//Consumer
-        new Thread(new Consumer(blockingQueue, goods), "Consumer-2").start();
-        new Thread(new Consumer(blockingQueue, goods), "Consumer-3").start();
+        /*new Thread(new Consumer(blockingQueue, goods), "Consumer-2").start();
+        new Thread(new Consumer(blockingQueue, goods), "Consumer-3").start();*/
     }
 }
