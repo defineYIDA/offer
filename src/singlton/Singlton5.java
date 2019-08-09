@@ -14,7 +14,7 @@ public class Singlton5 {
 
     }
 
-    public static Singlton5 Instance;
+    private static Singlton5 Instance;
 
     /**
      * 静态构造函数,当静态属性被调用时调用

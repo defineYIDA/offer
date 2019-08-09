@@ -1,4 +1,4 @@
-package test;
+package thread;
 
 import java.util.concurrent.*;
 
@@ -51,7 +51,6 @@ public class SyncQueueTester {
     //return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
     //                                      60L, TimeUnit.SECONDS,
     //                                      new SynchronousQueue<Runnable>());
-
 
 
     public static void main(String[] args) throws InterruptedException {
