@@ -5,6 +5,11 @@ package interview.贝壳找房笔试;
  * @Date: 2019/8/11 8:36
  */
 public class bkzf1 {
+    /**
+     * <>https://www.nowcoder.com/discuss/220715?type=0&order=0&pos=22&page=1</>
+     * https://www.nowcoder.com/discuss/220689?type=0&order=0&pos=9&page=1
+     * @param args
+     */
     public static void main(String[] args) {
         long[] arr = {1111111, 2, 3, 5, 7, 9, 11, 2, 34, 56, 7, 9, 1111};
         long[] res = find(arr, arr.length);

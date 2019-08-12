@@ -16,16 +16,18 @@ public class bkzf2 {
 
         int n = Integer.valueOf(br.readLine().trim());
         long[] nums = new long[n];
-        long[] dp = new long[n];
         for (int i = 0; i < n; i++) {
             long temp = Long.valueOf(br.readLine().trim());
             nums[i] = temp;
         }
 
+        long[] dp = new long[n];
         for (int i = 0; i < n; i++) {
             long max = 1;
             for (int j = 0; j < i; j++) {
-                max = Math.max(max, dp[j] + 1);
+                if (nums[i] > nums[j]) {
+                    max = Math.max(max, dp[j] + 1);
+                }
             }
             dp[i] = max;
         }
