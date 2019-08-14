@@ -26,7 +26,7 @@ public class LRUCache<K, V> {
         map = new Hashtable<>();
     }
 
-    public void set(K key, V value) {
+    public void put(K key, V value) {
         LRUNode<K, V> node = map.get(key);
         if (node == null) {
             //判断容量
