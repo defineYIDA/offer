@@ -68,6 +68,7 @@ public class Main {
      * 请尽量在全场考试结束10分钟前调试程序，否则由于密集排队提交，可能查询不到编译结果
      * 点击“调试”亦可保存代码
      * 编程题可以使用本地编译器，此页面不记录跳出次数
+     * https://www.nowcoder.com/discuss/225462?type=0&order=0&pos=86&page=0
      */
     private static int[] problem(int[][] arr, int rows, int cols) {
         int[] res = {4, 4, 3, 3, 2};
