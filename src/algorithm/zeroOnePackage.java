@@ -92,7 +92,7 @@ public class zeroOnePackage {
     public int o1package2(int[] values, int[] volume, int capacity) {
         int size = values.length;
         int[][] F = new int[size + 1][capacity + 1];//状态方程
-        initArr(F);//初始化边界值，f[i][0] = 0，f[0][j] = 0
+        initArr(F);//初始化边界值，f[i][0] = 0，f[0][j] = Integer.MIN_VALUE;
 
         for (int i = 1; i <= size; i++) {//当前商品为i - 1
             for (int v = 0; v <= capacity; v++) {//当前容量
