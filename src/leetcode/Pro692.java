@@ -7,6 +7,7 @@ import java.util.*;
  * @Date: 2019/9/1 9:55
  */
 public class Pro692 {
+
     public List<String> topKFrequent(String[] words, int k) {
         List<String> list = new ArrayList<>();
         int len;
@@ -26,25 +27,35 @@ public class Pro692 {
             @Override
             public int compare(Map.Entry<String, Integer> e1, Map.Entry<String, Integer> e2) {
                 if (e1.getValue().equals(e2.getValue())) {
-                    return e1.getKey().compareTo(e2.getKey());
+                    return e2.getKey().compareTo(e1.getKey());
                 }
-                return e2.getValue() - e1.getValue();
+                return e1.getValue().compareTo(e2.getValue());
             }
         });
         for (Map.Entry<String, Integer> e : map.entrySet()) {
-            if (minHeap.size() != k) {
+            if (minHeap.size() < k) {
                 minHeap.add(e);
-            } else if (e.getValue() >= minHeap.peek().getValue()) {
-                //minHeap.poll();
+            } else if (minHeap.comparator().compare(e, minHeap.peek()) > 0) {
+                minHeap.poll();
                 minHeap.add(e);
             }
         }
         //minHeap.addAll(map.entrySet());
-        for (Map.Entry<String, Integer> e : minHeap) {
-            list.add(e.getKey());
+        while (!minHeap.isEmpty()) {
+            list.add(0, minHeap.poll().getKey());
         }
+        //不能使用这种方式，要使用poll来保持出队时的顺序
+        /*for (Map.Entry<String, Integer> e : minHeap) {
+            list.add(e.getKey());
+        }*/
         return list;
     }
+    /**
+     * 最大堆
+     * @param words
+     * @param k
+     * @return
+     */
     public List<String> topKFrequent1(String[] words, int k) {
         List<String> list = new ArrayList<>();
         int len;
@@ -66,6 +77,7 @@ public class Pro692 {
                 if (e1.getValue().equals(e2.getValue())) {
                     return e1.getKey().compareTo(e2.getKey());
                 }
+                //最大堆无脑插入
                 return e2.getValue() - e1.getValue();
             }
         });
