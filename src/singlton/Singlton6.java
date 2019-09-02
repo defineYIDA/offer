@@ -9,7 +9,6 @@ package singlton;
 public class Singlton6 {
     private Singlton6() {
     }
-    private static Singlton6 instance;
     public static Singlton6 getInstance(){
         return Nested.singlton6;
     }
@@ -21,6 +20,6 @@ public class Singlton6 {
     }
 
     public static void main(String[] args){
-        System.out.println(instance);
+        System.out.println(Singlton6.getInstance());
     }
 }

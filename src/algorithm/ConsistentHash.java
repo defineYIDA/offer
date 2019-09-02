@@ -1,8 +1,9 @@
 package algorithm;
 
-import java.util.List;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
 
 /**
  * @Author: zl
@@ -38,7 +39,8 @@ public class ConsistentHash {
         } else {
             virtualNode = treeMap.firstEntry().getValue();
         }
-        return virtualNode.substring(0, virtualNode.indexOf("vir"));
+        return virtualNode;
+        //return virtualNode.substring(0, virtualNode.indexOf("vir"));
     }
 
     public String process(List<String> values, String key) {
@@ -55,10 +57,50 @@ public class ConsistentHash {
      * 即正数，在一定范围内
      */
     private long hash(String key) {
-        return key.hashCode() & 0x7fffffff;
+        //地址无关，由伪随机生成器生成，确保每一个对象的该值相同,明显indenttity不满足该要求
+        //int h = System.identityHashCode(key);
+        //业务相关
+        int h = key.hashCode();
+        //高位运算增加随机性
+        h = h ^ (h >>> 16);
+        return h & 0x7fffffff;
+    }
+
+    /**
+     * hash 运算
+     *CRC32_HASH、FNV1_32_HASH、KETAMA_HASH
+     */
+    public Long hashPlus(String value) {
+        MessageDigest md5;
+        try {
+            md5 = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("MD5 not supported", e);
+        }
+        md5.reset();
+        byte[] keyBytes = value.getBytes(StandardCharsets.UTF_8);
+
+        md5.update(keyBytes);
+        byte[] digest = md5.digest();
+
+        // hash code, Truncate to 32-bits
+        long hashCode = ((long) (digest[3] & 0xFF) << 24)
+                | ((long) (digest[2] & 0xFF) << 16)
+                | ((long) (digest[1] & 0xFF) << 8)
+                | (digest[0] & 0xFF);
+
+        return hashCode & 0xffffffffL;
     }
 
     public static void main(String[] args) {
+        List<String> values = new ArrayList<>();
+        values.add("127.0.0.1");
+        values.add("127.0.0.3");
+        values.add("10.0.0.1");
+        values.add("198.0.0.1");
 
+        ConsistentHash consistentHash = new ConsistentHash();
+        System.out.println(consistentHash.process(values, "key1"));
+        System.out.println(consistentHash.process(values, "key2"));
     }
 }
