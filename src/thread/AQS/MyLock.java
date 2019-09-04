@@ -19,6 +19,7 @@ public class MyLock {
             return true;
         }
 
+        //是否处于占用状态
         @Override
         protected boolean isHeldExclusively() {
             return getState() == 1;

@@ -20,7 +20,8 @@ public class DoubleLock {
                 int cur = getState();
                 int next = getState() - arg;
                 //因为存在并发线程更改同步状态，所以需要cas确保线程安全
-                if (compareAndSetState(cur, next)) {
+                //这个地方注意添加对当前值的判断，如果同步状态未0即需要进行挂起
+                if (next < 0 || compareAndSetState(cur, next)) {
                     //返回的是状态量
                     return next;
                 }
