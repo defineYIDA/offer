@@ -22,7 +22,7 @@ public class Main {
 
     /*请完成下面这个函数，实现题目要求的功能
      ******************************开始写代码******************************/
-    /*static ListNode partition(ListNode head,int m) {
+    static ListNode partition(ListNode head,int m) {
         if (head == null) {
             return null;
         }
@@ -31,17 +31,26 @@ public class Main {
         ListNode dummy2 = new ListNode(-1);//大于m
         ListNode pNode = head, d1 = dummy1, d2 = dummy2;
         while (pNode != null) {
-            if (node.val <= m) {
-                d1.next = node;
+            if (pNode.val < m) {
+                d1.next = pNode;
                 d1 = d1.next;
+                //d1.next = null;
             } else {
-                d2.next = node;
+                d2.next = pNode;
                 d2 = d2.next;
+                //d2.next = null;
             }
+            pNode = pNode.next;
         }
-        d1.next = dummy2.next;
-        return dummy1.next;
-    }*/
+        d1.next = null;
+        d2.next = null;
+        if (dummy1.next != null) {
+            d1.next = dummy2.next;
+            return dummy1.next;
+        } else {
+            return dummy2.next;
+        }
+    }
     /******************************结束写代码******************************/
 
 
@@ -147,4 +156,5 @@ public class Main {
      * https://www.nowcoder.com/discuss/245186?type=0&order=0&pos=6&page=1
      * https://www.nowcoder.com/discuss/245156?type=0&order=0&pos=18&page=1
      */
+
 }

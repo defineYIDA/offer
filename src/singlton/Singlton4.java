@@ -20,6 +20,7 @@ public class Singlton4 {
                 }
             }
         }
+
         return Singlton4;
     }
 }

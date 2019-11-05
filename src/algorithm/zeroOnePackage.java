@@ -12,16 +12,16 @@ public class zeroOnePackage {
         int[] values = {2, 3, 1, 4, 6, 5}; //物品价值
         int[] volume = {5, 6, 5, 1, 19, 7};//物品体积*/
         //--
-        int capacity = 4;//背包容量
-        int[] values = {1500, 3000, 2000}; //物品价值
-        int[] volume = {1, 4, 3};//物品体积
+        int capacity = 6;//背包容量
+        int[] values = {1, 1, 1}; //物品价值
+        int[] volume = {2, 4, 2};//物品体积
         //--
 /*        int capacity = 4;//背包容量
         int[] values = {1500, 3000, 2000,2000}; //物品价值
         int[] volume = {1, 4, 3,1};//物品体积*/
         //--
         zeroOnePackage zo = new zeroOnePackage();
-        int res = zo.o1package2(values, volume, capacity);
+        int res = zo.o1package3(values, volume, capacity);
         System.out.println(res);
     }
 
@@ -72,7 +72,10 @@ public class zeroOnePackage {
         F[0] = 0;//初始化边界值，f[i][0] = 0，f[0][j] = 0
 
         for (int i = 1; i <= size; i++) {//当前商品为i - 1
-            for (int v = capacity; v >= 0; v--) {//当前容量
+            for (int v = capacity; v >= volume[i - 1]; v--) {
+                F[v] = Math.max(F[v], values[i - 1] + F[v - volume[i - 1]]);
+            }
+            /*for (int v = capacity; v >= 0; v--) {//当前容量
                 int prev = F[v];//商品的上一个单元格的价值（最大价值）
 
                 //当前可用容量大于该物品容量，则比较如下二者的最大值：
@@ -82,12 +85,23 @@ public class zeroOnePackage {
                     int now = values[i - 1] + F[v - volume[i - 1]];//2)
                     F[v] = prev < now ? now : prev;
                 }
-            }
+            }*/
         }
 
         return F[capacity];
     }
-
+    //完全背包
+    public int o1package3(int[] values, int[] volume, int capacity) {
+        int size = values.length;
+        int[] F = new int[capacity + 1];//状态方程
+        F[0] = 0;//初始化边界值，f[i][0] = 0，f[0][j] = 0
+        for (int i = 1; i <= size; i++) {//当前商品为i - 1
+            for (int v = volume[i - 1]; v <= capacity; v++) {
+                F[v] = Math.max(F[v], values[i - 1] + F[v - volume[i - 1]]);
+            }
+        }
+        return F[capacity];
+    }
     //必须装满
     public int o1package2(int[] values, int[] volume, int capacity) {
         int size = values.length;
